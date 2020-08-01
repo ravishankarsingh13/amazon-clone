@@ -2,8 +2,13 @@ import React from 'react';
 import './Header.css';
 import { Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search"
- 
+import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket"; 
+import { useStateValue } from './StateProvider';
+
 function Header() {
+    const [{basket}] = useStateValue();
+    console.log(basket);
+
     return ( 
     <nav className="header"> 
             {/* logo at left side */}
@@ -25,27 +30,33 @@ function Header() {
                 {/* 1st link */}
                 <Link to="/login" className="header__link" >
                     <div className="header__option" >
-                        <span>hello</span>
-                        <span>Sign In</span>
+                        <span className="header__optionLineone" >hello</span>
+                        <span className="header__optionLinetwo">Sign In</span>
                     </div>
                 </Link>
                 {/* 2nd link */}
                 <Link to="/" className="header__link" >
                     <div className="header__option" >
-                        <span>Returns</span>
-                        <span>& Orders</span>
+                        <span className="header__optionLineone">Returns</span>
+                        <span className="header__optionLinetwo">& Orders</span>
                     </div>
                 </Link>
                 {/* 3rd link */}
                 <Link to="/" className="header__link" >
                     <div className="header__option" >
-                        <span>Your</span>
-                        <span>Prime</span>
+                        <span className="header__optionLineone">Your</span>
+                        <span className="header__optionLinetwo">Prime</span>
                     </div>
                 </Link>
             </div>
 
             {/* bashket */}
+            <Link to="/checkout" className="header__link" >
+                <div className="header__optionBasket">
+                    <ShoppingBasketIcon />
+    <span className="header__optionLinetwo header__basketCount" >{basket?.length}</span>
+                </div>
+            </Link>
         </nav>
     );
 }
